@@ -8,7 +8,7 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="http://vps001.myxz.fun" target="_blank">HOME by 明裕学长</a>
+        <a href="http://vps001.myxz.fun" target="_blank">China_MYXZ by 明裕学长版权所有</a>
       </a-layout-footer>
     </a-layout>
   </div>

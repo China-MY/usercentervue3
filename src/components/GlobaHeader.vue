@@ -1,13 +1,26 @@
 <template>
   <div id="globalHeader">
-    <div class="title-bar">
-      <img class="logo" src="../assets/logo.png" alt="logo" />
-      <div class="title">淮高职用户中心</div>
-    </div>
-    <a-menu v-model:selectedKeys="current" mode="horizontal" :items="items" />
-    <div class="user-login-status">
-      <a-button type="primary" href="/user/login">登录</a-button>
-    </div>
+    <a-row :wrap="false">
+      <a-col flex="200px">
+        <div class="title-bar">
+          <img class="logo" src="../assets/logo.png" alt="logo" />
+          <div class="title">淮高职用户中心</div>
+        </div>
+      </a-col>
+      <a-col flex="auto">
+        <a-menu
+          v-model:selectedKeys="current"
+          mode="horizontal"
+          :items="items"
+          @click="DMenuClick"
+        ></a-menu>
+      </a-col>
+      <a-col flex="80px">
+        <div class="user-login-status">
+          <a-button type="primary" href="/user/login">登录</a-button>
+        </div>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
@@ -15,7 +28,19 @@
 import { h, ref } from 'vue'
 import { CrownOutlined, HomeOutlined } from '@ant-design/icons-vue'
 import type { MenuProps } from 'ant-design-vue'
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
+// 定义并初始化 current 变量
+const current = ref<string[]>(['mail'])
+//监听路由变化，并更新 current 变量
+router.afterEach(() => {
+  current.value = [router.currentRoute.value.path]
+})
+// 菜单点击事件
+const DMenuClick = function ({ key }: { key: string }) {
+  router.push({ path: key })
+}
+// 菜单项
 const items = ref<MenuProps['items']>([
   {
     key: '/',
