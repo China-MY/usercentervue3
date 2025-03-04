@@ -17,7 +17,12 @@
       </a-col>
       <a-col flex="80px">
         <div class="user-login-status">
-          <a-button type="primary" href="/user/login">登录</a-button>
+          <div v-if="loginUserStore.loginUser.id">
+            {{ loginUserStore.loginUser.username ?? '无名' }}
+          </div>
+          <div v-else>
+            <a-button type="primary" href="/user/login">登录</a-button>
+          </div>
         </div>
       </a-col>
     </a-row>
@@ -27,9 +32,13 @@
 <script lang="ts" setup>
 import { h, ref } from 'vue'
 import { CrownOutlined, HomeOutlined } from '@ant-design/icons-vue'
-import type { MenuProps } from 'ant-design-vue'
+import { type MenuProps } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
+import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
+
+const loginUserStore = useLoginUserStore()
 const router = useRouter()
+
 // 定义并初始化 current 变量
 const current = ref<string[]>(['mail'])
 //监听路由变化，并更新 current 变量
@@ -50,11 +59,13 @@ const items = ref<MenuProps['items']>([
   },
   {
     key: '/user/login',
+    icon: () => h(HomeOutlined),
     label: '用户登录',
     title: '用户登录',
   },
   {
     key: '/user/register',
+    icon: () => h(HomeOutlined),
     label: '用户注册',
     title: '用户注册',
   },
@@ -68,6 +79,11 @@ const items = ref<MenuProps['items']>([
     key: 'others',
     label: h('a', { href: 'http://vps001.myxz.fun', target: '_blank' }, '明裕学长'),
     title: '明裕学长',
+  },
+  {
+    key: '/logout',
+    label: h('a', { href: 'http://127.0.0.1:8888/user/logout' }, '注销登录'),
+    title: '注销登录',
   },
 ])
 </script>
