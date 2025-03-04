@@ -12,7 +12,7 @@ router.beforeEach(async (to, from, next) => {
   if (toUrl.startsWith('/admin')) {
     if (!loginUser || loginUser.userRole !== 1) {
       message.error('没有权限')
-      next(`/user/login?redirect=${to.fullPath}`)
+      next(`/?redirect=${to.fullPath}`)
       return
     }
   }

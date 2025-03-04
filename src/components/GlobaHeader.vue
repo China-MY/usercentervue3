@@ -15,10 +15,11 @@
           @click="DMenuClick"
         ></a-menu>
       </a-col>
-      <a-col flex="80px">
+      <a-col flex="150px">
         <div class="user-login-status">
           <div v-if="loginUserStore.loginUser.id">
             {{ loginUserStore.loginUser.username ?? '无名' }}
+            <a-button type="primary" @click="handleLogout">注销</a-button>
           </div>
           <div v-else>
             <a-button type="primary" href="/user/login">登录</a-button>
@@ -32,12 +33,23 @@
 <script lang="ts" setup>
 import { h, ref } from 'vue'
 import { CrownOutlined, HomeOutlined } from '@ant-design/icons-vue'
-import { type MenuProps } from 'ant-design-vue'
+import { type MenuProps, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
+import { userLogout } from '@/api/user.ts'
 
 const loginUserStore = useLoginUserStore()
 const router = useRouter()
+
+// 注销
+const handleLogout = async () => {
+  const res = await userLogout({})
+  if (res.data.code === 0) {
+    message.success('注销成功')
+    loginUserStore.setLoginUser({})
+    router.go(0)
+  }
+}
 
 // 定义并初始化 current 变量
 const current = ref<string[]>(['mail'])
@@ -58,18 +70,6 @@ const items = ref<MenuProps['items']>([
     title: '主页',
   },
   {
-    key: '/user/login',
-    icon: () => h(HomeOutlined),
-    label: '用户登录',
-    title: '用户登录',
-  },
-  {
-    key: '/user/register',
-    icon: () => h(HomeOutlined),
-    label: '用户注册',
-    title: '用户注册',
-  },
-  {
     key: '/admin/userManage',
     icon: () => h(CrownOutlined),
     label: '用户管理',
@@ -79,11 +79,6 @@ const items = ref<MenuProps['items']>([
     key: 'others',
     label: h('a', { href: 'http://vps001.myxz.fun', target: '_blank' }, '明裕学长'),
     title: '明裕学长',
-  },
-  {
-    key: '/logout',
-    label: h('a', { href: 'http://127.0.0.1:8888/user/logout' }, '注销登录'),
-    title: '注销登录',
   },
 ])
 </script>

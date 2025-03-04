@@ -75,3 +75,15 @@ export const deleteUser = async (id: string) => {
     },
   })
 }
+
+/**
+ * 更新用户
+ * @param params
+ */
+export const updateUser = async (params: any) => {
+  return myAxios.request({
+    url: '/api/user/update',
+    method: 'POST',
+    data: params,
+  })
+}
