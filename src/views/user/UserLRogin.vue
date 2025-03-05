@@ -1,8 +1,8 @@
 <template>
   <div id="userAuth">
     <div class="auth-container">
-      <h2 class="title" v-if="isShowingLogin">用户登录</h2>
-      <h2 class="title" v-else>用户注册</h2>
+      <h2 class="title" v-if="isShowingLogin">淮高职社区登录</h2>
+      <h2 class="title" v-else>淮高职社区注册</h2>
 
       <!-- 登录注册表单 -->
       <a-form
@@ -85,7 +85,6 @@ import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 
 const router = useRouter()
 const loginUserStore = useLoginUserStore()
-
 // 表单数据
 const formData = reactive({
   userAccount: '',
@@ -143,118 +142,186 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+/* 新增颜色变量方便维护 */
+:root {
+  --primary-color: #4361ee;
+  --hover-color: #3f37c9;
+  --text-color: #2b2d42;
+  --light-bg: rgba(255, 255, 255, 0.85);
+}
 
 #userAuth {
+  /* 添加渐变遮罩提升文字可读性 */
+  background:
+    linear-gradient(to bottom right, rgba(67, 97, 238, 0.1), rgba(255, 255, 255, 0.3)),
+    url('https://public.ysjf.com/mediastorm/material/material/%E9%9D%92%E5%B2%9B-12-%E5%85%A8%E6%99%AF-20250114.JPG');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: url('https://public.ysjf.com/mediastorm/material/material/%E9%9D%92%E5%B2%9B-12-%E5%85%A8%E6%99%AF-20250114.JPG')
-    no-repeat center center fixed;
-  background-size: cover;
-  background-color: #f0f2f5;
 }
 
 .auth-container {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
-  padding: 32px;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  background: var(--light-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .auth-container:hover {
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-  transform: translateY(-4px);
-}
-
-.auth-form {
-  background: transparent;
-  border-radius: 15px;
-}
-
-.ant-form-item-label {
-  color: #333;
-  font-weight: 500;
-}
-
-.ant-input,
-.ant-btn {
-  border-radius: 8px;
-  font-size: 14px;
+  transform: translateY(-5px);
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
 }
 
 .title {
-  font-size: 30px;
-  font-weight: 600;
-  margin-bottom: 38px;
   text-align: center;
-  color: #fff;
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  color: var(--text-color);
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.fullscreen-btn {
-  background: linear-gradient(45deg, #2a73e8, #1f55d4);
-  border: none;
-  color: white;
-  width: 100%;
-  height: 60px;
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* 优化输入框样式 */
+.ant-input {
+  border-radius: 8px;
+  padding: 10px 15px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(42, 115, 232, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 2px solid #e9ecef;
+}
+
+.ant-input:hover,
+.ant-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+/* 增强按钮视觉效果 */
+.fullscreen-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+  border: none;
+  height: 50px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .fullscreen-btn:hover {
-  background: linear-gradient(45deg, #1f55d4, #2a73e8);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(42, 115, 232, 0.8);
+  transform: scale(1.02);
+  box-shadow:
+    0 5px 15px rgba(67, 97, 238, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
 }
 
-.fullscreen-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(42, 115, 232, 0.6);
-}
-
+/* 优化切换链接样式 */
 .ant-btn-link {
-  color: #1890ff;
-  margin-top: 16px;
+  color: var(--primary-color) !important;
+  font-weight: 500;
+  position: relative;
+  padding: 0 0 2px;
 }
 
-.ant-form-item-error-tip {
-  margin-top: 8px;
-  color: #f5222d;
+.ant-btn-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.ant-btn-link:hover::after {
+  width: 100%;
+}
+
+/* 优化错误提示样式 */
+.ant-form-item-explain-error {
+  font-size: 13px;
+  margin-top: 6px;
+  padding-left: 8px;
+  position: relative;
+}
+
+.ant-form-item-explain-error::before {
+  content: '!';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 16px;
+  height: 16px;
+  background: #ff4d4f;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 16px;
   font-size: 12px;
 }
 
-@media (max-width: 768px) {
+/* 优化移动端样式 */
+@media (max-width: 576px) {
   .auth-container {
     padding: 24px;
+    width: 95%;
   }
 
   .title {
-    font-size: 24px;
-    margin-bottom: 24px;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
   }
 
-  .ant-form-item {
-    margin-bottom: 20px;
+  .ant-form-item-label {
+    text-align: left !important;
   }
 
   .fullscreen-btn {
-    height: 50px;
+    height: 48px;
     font-size: 16px;
   }
+}
+
+/* 添加表单入场动画 */
+@keyframes formEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-form {
+  animation: formEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 </style>
