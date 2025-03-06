@@ -106,6 +106,21 @@ export const updateUser = async (params: any) => {
     },
   })
 }
+/**
+ * 根据id获取用户信息（普通用户修改密码用）
+ * @param id
+ */
+export const setidpasswordInfo = async (id: string) => {
+  return myAxios.request({
+    url: '/api/user/setidpasswordInfo',
+    method: 'POST',
+    data: id,
+    // 关键点：要传递 JSON 格式的值
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+}
 
 /**
  * 用户修改密码
