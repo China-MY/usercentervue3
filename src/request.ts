@@ -6,9 +6,9 @@ const ENV = import.meta.env
 // 获取基础 URL
 const getBaseUrl = () => {
   if (ENV.MODE === 'development') {
-    return 'http://localhost:8888'
+    return 'http://localhost:9090'
   } else {
-    return 'http://vps001.myxz.fun'
+    return 'http://localhost:9090'
   }
 }
 

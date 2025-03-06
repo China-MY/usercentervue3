@@ -6,7 +6,7 @@ import myAxios from '@/request'
  */
 export const userRegister = async (params: any) => {
   return myAxios.request({
-    url: '/api/user/register',
+    url: '/user/register',
     method: 'POST',
     data: params,
   })
@@ -18,7 +18,7 @@ export const userRegister = async (params: any) => {
  */
 export const userLogin = async (params: any) => {
   return myAxios.request({
-    url: '/api/user/login',
+    url: '/user/login',
     method: 'POST',
     data: params,
   })
@@ -30,7 +30,7 @@ export const userLogin = async (params: any) => {
  */
 export const userLogout = async (params: any) => {
   return myAxios.request({
-    url: '/api/user/logout',
+    url: '/user/logout',
     method: 'POST',
     data: params,
   })
@@ -41,7 +41,7 @@ export const userLogout = async (params: any) => {
  */
 export const getCurrentUser = async () => {
   return myAxios.request({
-    url: '/api/user/current',
+    url: '/user/current',
     method: 'GET',
   })
 }
@@ -52,7 +52,7 @@ export const getCurrentUser = async () => {
  */
 export const searchUsers = async (username: any) => {
   return myAxios.request({
-    url: '/api/user/search',
+    url: '/user/search',
     method: 'GET',
     params: {
       username,
@@ -66,7 +66,7 @@ export const searchUsers = async (username: any) => {
  */
 export const IdInfoUser = async (id: string) => {
   return myAxios.request({
-    url: '/api/user/idInfo',
+    url: '/user/idInfo',
     method: 'POST',
     data: id,
     // 关键点：要传递 JSON 格式的值
@@ -82,7 +82,7 @@ export const IdInfoUser = async (id: string) => {
  */
 export const deleteUser = async (id: string) => {
   return myAxios.request({
-    url: '/api/user/delete',
+    url: '/user/delete',
     method: 'POST',
     data: id,
     // 关键点：要传递 JSON 格式的值
@@ -98,7 +98,7 @@ export const deleteUser = async (id: string) => {
  */
 export const updateUser = async (params: any) => {
   return myAxios.request({
-    url: '/api/user/update',
+    url: '/user/update',
     method: 'POST',
     data: params,
     headers: {
@@ -112,7 +112,7 @@ export const updateUser = async (params: any) => {
  */
 export const setidpasswordInfo = async (id: string) => {
   return myAxios.request({
-    url: '/api/user/setidpasswordInfo',
+    url: '/user/setidpasswordInfo',
     method: 'POST',
     data: id,
     // 关键点：要传递 JSON 格式的值
@@ -128,7 +128,7 @@ export const setidpasswordInfo = async (id: string) => {
  */
 export const userSetPassword = async (params: any) => {
   return myAxios.request({
-    url: '/api/user/setpassword',
+    url: '/user/setpassword',
     method: 'POST',
     data: params,
     headers: {
